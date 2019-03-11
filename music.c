@@ -3,6 +3,8 @@
 #define GET_NAME "%255s"  //用于scanf函数输入文件名，说明输入字符串的长度
 int main(int argc, char const *argv[]) {
     unsigned i, l;  //i表示操作时指向数组的游标，l表示已列表总长度
+    unsigned int j;  //用于排序的循环控制变量
+    char *p_temp;  //用于排序时交换指针列表中的数据
     char *p_list[MAX_LENGTH]; //定义指针列表
     char f_list[MAX_LENGTH][MAX_FILE_LENGTH + 1]; //定义文件名列表
                 //文件名加一是用于存放字符串结束符
@@ -20,6 +22,7 @@ int main(int argc, char const *argv[]) {
         puts("(2)删除列表中的文件");
         puts("(3)打印播放列表");
         puts("(4)退出程序");
+        puts("(5)按文件名排序");
         scanf("%1d", &select_value);   //输入的菜单选择
         getchar();  //吸收多余的输入字符
         switch(select_value){
@@ -65,6 +68,21 @@ int main(int argc, char const *argv[]) {
             }
             case 4:{                //退出程序
                 exit_switch = 0;    //将程序主操作循环退出标记置0
+                break;
+            }
+            case 5:{   //按文件名排序
+                if(l > 1){ //在文件列表长度大于1时，才有排序的意义
+                    for(i = 0; i < l - 1; i++){//从列表首单元到列表长度减1单元循环
+                        for(j = i+1; j < l; j++){
+                            if(*p_list[i] > *p_list[j]){//比较两个文件名字符串首个字符大小，从小到大排序
+                                p_temp = p_list[i];
+                                p_list[i] = p_list[j];
+                                p_list[j] = p_temp;
+                            }
+                        }
+                    }
+                }
+                break;
             }
         }
     }while(exit_switch);            //如果主操作循环退出标记不为0，继续执行循环
