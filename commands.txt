@@ -23,8 +23,4 @@ git pull --rebase
 push代码到服务器 git push origin master
 
 3 克隆代码到本地
-在svn中，我们都叫checkout. 把代码checkout到本地。而git中我们叫克隆，克隆会把整个仓库都拉到本地。
-
-如，我要把刚才的工程再clone到本地。
-
 git clone git@example.com:namespace/projectname.git    
