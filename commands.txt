@@ -11,8 +11,6 @@ git push // 也可以直接这样提交，前提是当前分支与远程分支�
 git pull --rebase
 
 2 初始上传代码
-如果你已经使用过git了，那么这一步对你来说可以跳过了。整体来说比较简单的。下面的$project_root代表工程根目录
-
 进入工程目录 cd $project_root
 初始化git仓库 git init
 添加文件到仓库 git add .
@@ -20,7 +18,7 @@ git pull --rebase
 链接到(git server git remote add origin git@example.com:namespace/projectname.git)
 	git remote add origin git@github.com:BUAAtao/music_player.git
 
-push代码到服务器 git push origin master
+push代码到服务器git push origin master
 
 3 克隆代码到本地
 git clone git@example.com:namespace/projectname.git    
