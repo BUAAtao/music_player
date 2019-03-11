@@ -4,6 +4,11 @@
 #define MAX_LENGTH 40                   //定义数组长度，表示列表最大长度
 #define MAX_FILE_LENGTH 255             //定义数组长度，表明文件名最大长度
 #define GET_NAME "%255s"                //用于scanf函数输入文件名，说明输入字符串的长度
+
+#define EXIT_SUCCESS
+
+int hazy_find(const char *str1, const char *str2);
+
 int main(int argc, char const *argv[]) {
     unsigned i, l;                      //i表示操作时指向数组的游标，l表示已列表总长度
     unsigned int j;                     //用于排序的循环控制变量
