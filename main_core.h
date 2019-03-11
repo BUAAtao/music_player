@@ -2,7 +2,7 @@
 #define MAIN_CORE_H_  //定义头文件
 /*程序控制指令*/
 #define GENERAL_MEDIALIB_INIT       1000  //初始化媒体库列表
-#define GENERAL_PLAyLIST_INIT       1001  //初始化播放列表链表
+#define GENERAL_PLAYLIST_INIT       1001  //初始化播放列表链表
 #define GENERAL_PLAY_MODE           1002  //设置播放模式：顺序、随机、循环
 #define GENERAL_VOLUME              1003  //调节音量
 #define GENERAL_MUTE                1004  //静音
@@ -48,6 +48,8 @@
 
 int general_init(void);
 int general_sleep(void);
+int general_volume(void);
+int general_mute(void);
 
 
 #endif  /*MAIN_CORE_H_*/                  //结束头文件定义
