@@ -1,4 +1,4 @@
-提交代码到远程仓库
+1提交代码到远程仓库
 提交代码前，建议先下拉代码并rebase。因为我们的一份代码，可能多人同时修改，
 当多人同时修改一处代码时会产生分叉合并，所以为了保证分支记录纯净（只有一条线），
 我们提交时先把被人提交的pull并rebase一下然后提交自己的，所以执行如下命令
@@ -9,3 +9,22 @@ git push // 也可以直接这样提交，前提是当前分支与远程分支�
 
 当远程仓库有改动时，我们需要将最新代码下拉至本地仓库
 git pull --rebase
+
+2 初始上传代码
+如果你已经使用过git了，那么这一步对你来说可以跳过了。整体来说比较简单的。下面的$project_root代表工程根目录
+
+进入工程目录 cd $project_root
+初始化git仓库 git init
+添加文件到仓库 git add .
+提交代码到仓库 git commit -m 'init commit'
+链接到(git server git remote add origin git@example.com:namespace/projectname.git)
+	git remote add origin git@github.com:BUAAtao/music_player.git
+
+push代码到服务器 git push origin master
+
+3 克隆代码到本地
+在svn中，我们都叫checkout. 把代码checkout到本地。而git中我们叫克隆，克隆会把整个仓库都拉到本地。
+
+如，我要把刚才的工程再clone到本地。
+
+git clone git@example.com:namespace/projectname.git    
