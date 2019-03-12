@@ -1,6 +1,9 @@
 #include "main_core.h"
+#include "medialib.h"
+
 void *main_core(int cmd, void *data)
 {
+    link_t mlink = {NULL, 0};                    //初始化媒体库链表
     static int state = 0;                        //用于保存当前程序状态
     static char *now_play;                       //正在播放的媒体文件路径
     static char *media_type;                     //正在播放的媒体类型
@@ -9,7 +12,7 @@ void *main_core(int cmd, void *data)
 
     mlink
     plink
-    link_t
+    //link_t 在medialib.h中
 
     .
     .
