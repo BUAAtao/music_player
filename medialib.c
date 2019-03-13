@@ -1,6 +1,10 @@
 #include <string>
 #include <id3tag.h>
-#include "medialib.h"               //包含媒体库相关函数的头文件
+#include "medialib.h"                               //包含媒体库相关函数的头文件
+
+int hazy_find(const char *str1, const char *str2);
+
+/*读取媒体文件信息到媒体库项目中*/
 int read_tag_from_file(const char *file, struct _medialib *media)
 {
     struct id3_file *id3file;       //用于保存libid3tag库文件对象
@@ -39,14 +43,14 @@ int read_tag_from_file(const char *file, struct _medialib *media)
     return 0;
 }
 
+/*添加文件到媒体库*/
 node_t *link_to_end(node_t *nt)
 {
-    if(nt->p)                           //判断指针是否指向NULL
-        return link_to_end(nt->p);      //递归调用
+    if(nt->p)                                       //判断指针是否指向NULL
+        return link_to_end(nt->p);                  //递归调用
     else
         return nt;
 }
-
 int link_add(link_t *mlink, const char *file){
     node_t *endnode;
     node_t *mnode = (node_t)malloc(sizeof(node_t)); //为结点分配内存
@@ -69,7 +73,7 @@ int link_add(link_t *mlink, const char *file){
     mlink->length++;                                //链表个数的计数器自增
     return 0;
 }
-
+/*在媒体库中查找文件*/
 int link_find(link_t *mlink,                        //链表指针
           find_cond t,                              //查找条件
           const char *str2,                         //查找字符串
@@ -135,4 +139,45 @@ int link_find(link_t *mlink,                        //链表指针
         * (jump2 + 0) = *(jump + 0);                //将临时数组内的数据复制到结果数组
     free(tmp_link);                                 //释放临时数组的内存空间
     return count;                                   //返回结果数
+}
+/*从媒体库中删除选定文件*/
+int link_del(link_t *mlink, int p)
+{
+    node_t *tmp, *tmp2;                             //删除操作使用的临时指针
+    int i;
+    if(p < 1 || p > mlink->length){                 //判断序号是否有效
+        printf("输入的节点位置错误");
+        return 1;
+    }
+    tmp = mlink->np;                                //指向首端节点
+    if( p == 1) {                                   //判断删除的是否为首端节点
+        mlink->np = tmp->p;                         //将链表入口地址置为首端节点的指针成员指向的地址
+        free(tmp);                                  //释放被删除节点的内存空间
+    }
+    else {
+        i = p - 2;                                  //计算遍历的次数
+        while(i){                                   //遍历到被删除节点前的一个节点
+            tmp = tmp->p;
+            i--;
+        }
+        tmp2 = tmp->p;                              //保存被删除结点的内存地址
+        tmp->p = tmp2->p;                           //将被删除节点前一个节点的指针成员指向后一个节点
+        free(tmp2);                                 //释放被删除节点的内存空间
+    }
+    mlink->length--;                                //将链表的长度减1
+    return 0;
+}
+/*从媒体库删除所有文件*/
+int link_del_all(link_t *mlink)
+{
+    node_t *tmp;                                    //临时用于保存链表首端的节点
+    if(mlink->length > 0){                          //判断链表是否为空
+        do {
+            tmp = mlink->np;                        //指向链表首端节点
+            mlink->np = tmp->p;                     //将链表入口指向下一个节点
+            free(tmp);                              //释放原先链表首端的节点
+        } while(mlink->np);                         //判断链表是否为空
+        mlink->length = 0;
+    }
+    return 0;
 }
