@@ -25,5 +25,14 @@ struct _link_t {                               //链表的结构体
     node_t *np;                                //指向链表中第一个结点首地址的指针
     int length;                                //用于记录链表的长度
 };
+
+typedef enum _find_cond find_cond;
+enum _find_cond {
+    BY_TITLE,                                  //按标题查找
+    BY_ARTIST,                                 //按艺术家查找
+    BY_ABLUM,                                  //按专辑查找
+    BY_GENRE,                                  //按流派查找
+    BY_FILEPATH                                //按文件查找
+};
 int read_tag_from_file(const char *file, struct _medialib *media);
 #endif  /*MEDIALIB_H_*/
